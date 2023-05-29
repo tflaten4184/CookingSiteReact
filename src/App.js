@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import HomeScreen from './screens/HomeScreen';
 import RecipeScreen from './screens/RecipeScreen';
+import PageNotFound from './screens/PageNotFound';
 
 import './App.css';
 
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path='/' element={<HomeScreen />}></Route>
           <Route path='/recipe/:id' element={<RecipeScreen />}></Route>
+          <Route path='*' element={<PageNotFound />}></Route>
         </Routes>
       </Container>
       <Footer />
