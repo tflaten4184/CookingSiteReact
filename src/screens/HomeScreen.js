@@ -12,7 +12,7 @@ function HomeScreen() {
   useEffect(() => {
     async function fetchRecipes() {
       console.log("before axios");
-      const { data } = await axios.get("http://127.0.0.1:8000/api/recipes/");
+      const { data } = await axios.get("/api/recipes/");
       console.log(data);
       setRecipes(data);
     }
