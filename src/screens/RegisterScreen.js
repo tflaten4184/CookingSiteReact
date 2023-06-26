@@ -1,11 +1,13 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
+import { Navigate } from 'react-router-dom'
 
 function RegisterScreen() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [redirect, setRedirect] = useState(false);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -21,9 +23,13 @@ function RegisterScreen() {
     });
 
     const content = await response.json();
-
     console.log(content);
+    setRedirect(true);
   };
+
+  if (redirect) {
+    return <Navigate to="/login" />
+  } 
 
   return (
     <Form onSubmit={submit}>
