@@ -6,7 +6,7 @@ import Recipe from "../components/Recipe";
 
 import recipes from "../recipes";
 
-function HomeScreen() {
+function HomeScreen(props) {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
@@ -22,7 +22,8 @@ function HomeScreen() {
 
   return (
     <div>
-      HomeScreen
+      <h2>HomeScreen</h2>
+      {props.name ? `Welcome, you are logged in as "${props.name}"` : "You are not logged in."}
       <Row>
         {recipes.map((recipe) => (
           <Col key={recipe.id}>

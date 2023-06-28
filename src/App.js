@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { Container } from 'react-bootstrap';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
@@ -15,13 +16,32 @@ import './App.css';
 import AboutScreen from './screens/AboutScreen';
 
 function App() {
+
+  // Set logged-in user
+  const [name, setName] = useState(""); // User object instead?
+  useEffect(() => {
+    (
+      async () => {
+        const response = await fetch("http://localhost:8000/api/user", {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+        });
+
+        const content = await response.json();
+        setName(content.name);
+
+      }
+    )();
+  });
+
   return (
     <BrowserRouter>
       <Header />
       <Navbar />
       <Container>
         <Routes>
-          <Route path='/' element={<HomeScreen />}></Route>
+          <Route path='/' element={<HomeScreen name={name} />}></Route>
           <Route path='/recipe/:id' element={<RecipeScreen />}></Route>
           <Route path='/about/' element={<AboutScreen />}></Route>
           <Route path='/register/' element={<RegisterScreen />}></Route>
